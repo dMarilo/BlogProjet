@@ -1,0 +1,9 @@
+<div class="w-full h-full min-h-screen bg-white p-8">
+  <h1 class="text-4xl font-bold">Most followed bloggers</h1>
+  <div class="mt-4">
+    <div *ngFor="let user of users" class="bg-gray-100 p-4 mb-4 rounded-lg shadow-md">
+      <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+      <p><strong>Subscribers:</strong> {{ user.subscribers }}</p>
+    </div>
+  </div>
+</div>

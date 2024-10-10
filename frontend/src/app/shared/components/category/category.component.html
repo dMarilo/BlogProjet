@@ -1,0 +1,41 @@
+<section class="py-6 md:py-14 w-full flex justify-center relative">
+  <!-- Categories Carousel -->
+@if(!isCategoryLoading && !isPageLoading) {             
+  <div class="relative flex items-center justify-center mx-auto max-w-7xl w-full fade-in-out-cat">
+    <!-- Left Arrow -->
+    <button 
+      class="absolute left-0 z-10 p-2 bg-transparent rounded-full shadow-md text-white"
+      (click)="scrollCarousel('left')" [disabled]="!carousel">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+
+    <div #carousel class="carousel flex overflow-x-auto snap-x snap-mandatory hide-scrollbar mx-4 py-2 max-w-6xl">
+      <div class="flex flex-nowrap space-x-4">
+        @for(category of categories; track category){
+          <button 
+            (click)="onCategorySelect(category.id)" 
+            class="flex-shrink-0 flex flex-col items-center bg-transparent text-white px-2 py-1 rounded-full transition-transform duration-300 ease-in-out snap-center min-w-[150px]">
+            
+            <div 
+              class="w-16 h-16 bg-cover bg-center rounded-full mb-2 hover:scale-110 transition-transform duration-300 hover:shadow-lg"
+              [ngStyle]="{'background-image': 'url(' + category.image + ')'}">
+            </div>                    
+            <span class="text-sm font-bold text-white">{{ category.name }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- Right Arrow -->
+    <button 
+      class="absolute right-0 z-10 p-2 bg-transparent rounded-full shadow-md text-white"
+      (click)="scrollCarousel('right')" [disabled]="!carousel">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+}
+</section>

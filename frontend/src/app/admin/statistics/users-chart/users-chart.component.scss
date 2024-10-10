@@ -1,0 +1,10 @@
+/* user-chart.component.css */
+.chart-container {
+  position: relative;
+  height: 500px;
+  width: 100%;
+}
+
+canvas {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

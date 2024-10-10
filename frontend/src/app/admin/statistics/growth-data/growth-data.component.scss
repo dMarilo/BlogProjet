@@ -1,0 +1,38 @@
+.card {
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  color: white;
+  transition: transform 0.3s;
+  position: relative;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.icon-container {
+  margin-right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container i {
+  color: white; /* Set icon color to white */
+}
+
+.card-content {
+  z-index: 1;
+}
+
+.card-content h2 {
+  margin-bottom: 0.5rem;
+}
+
+.card-content p {
+  font-size: 1.875rem; /* 3xl text size */
+  font-weight: bold;
+}

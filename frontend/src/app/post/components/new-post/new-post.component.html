@@ -1,0 +1,138 @@
+<section class="w-full h-screen overflow-hidden relative">
+  <div class="w-full h-full absolute flex flex-col justify-center bg-black/70">
+    <div class="flex items-center justify-between py-8 px-6 md:px-20">
+      <a href="/">
+        <img
+          src="/assets/logo.png"
+          alt="Singularity Logo"
+          class="w-60 h-auto"
+        />
+      </a>
+      <h1 class="text-3xl font-bold text-white">
+        Add New Post
+      </h1>
+      <div class="flex justify-end items-start">
+        <a href="/"
+          class="px-4 py-2 flex items-center gap-2 rounded-full bg-logo-green border border-logo-green hover:border-white hover:bg-transparent transition-all text-white"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+          <span class="text-xl">Back</span>
+        </a>
+      </div>
+    </div>
+    <div class="flex w-full h-full items-center justify-center">
+      <div class="flex w-5/6 h-[800px] bg-black/80 rounded-lg overflow-hidden py-5">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          class="flex flex-col lg:flex-row w-full h-full"
+        >
+          <div class="w-1/2 h-full px-10 overflow-y-auto">
+            <div class=" flex flex-col gap-3 w-full h-full">
+              <div>
+                <label for="title" class="block text-white/80 w-full font-semibold text-xl mb-2">Title:</label>
+                <input
+                  formControlName="title"
+                  type="text"
+                  required
+                  placeholder="Your Title"
+                  class="bg-transparent border text-white border-gray-300 rounded-lg block w-full p-3 text-xl, focus:outline-none focus:border-gray-500"
+                />
+              </div>
+              <div>
+                <label for="shortDescription" class="block text-white/80 w-full font-semibold text-xl mb-2"
+                  >Description:</label
+                >
+                <textarea
+                  required
+                  type="text"
+                  rows="4"
+                  id="shortDescription"
+                  maxlength="255"
+                  class="bg-transparent border text-white border-gray-300 rounded-lg block w-full p-3 focus:outline-none focus:border-gray-500"
+                  formControlName="shortDescription"
+                ></textarea>
+                <div class="text-white/60 text-sm mt-1">
+                  {{ (form.get('shortDescription')?.value?.length) }} / 255
+                </div>
+              </div>
+              <div class="mb-6">
+                <app-dropdown
+                  (categorySelected)="onCategorySelected($event)"
+                ></app-dropdown>
+              </div>
+              <div>
+                <div class="mb-6">
+                  <label for="slug" class="block text-white/80 w-full font-semibold text-xl mb-2">Slug:</label>
+                  <input required readonly
+                    type="text"
+                    id="slug"
+                    class="bg-transparent border text-white border-gray-300 rounded-lg block w-full p-3 text-xl, focus:outline-none focus:border-gray-500"
+                    formControlName="slug"
+                  />
+                </div>
+              </div>
+              <div>
+                <label for="post-dropzone" class="block text-white/80 w-full font-semibold text-xl mb-2">Choose an image:</label>
+                <app-post-image-dropzone></app-post-image-dropzone>
+              </div>
+              <div class="flex justify-end">
+                <button
+                  type="submit"
+                  class="w-full bg-logo-green text-white p-4 rounded-md hover:bg-transparent border border-logo-green hover:border-white transition-all"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="w-1/2 h-full p-5">
+            <div
+              class="flex flex-col h-full items-center justify-center overflow-y-auto"
+            >
+              <label
+                for="content"
+                class="block text-white/80 w-full font-semibold text-2xl mb-4"
+                >
+                </label>
+              <editor
+                formControlName="content"
+                [apiKey]="apiKey"
+                [init]="{
+                  selector: 'textarea',
+                  plugins: 'lists link image table code help wordcount',
+                  height: 700,
+                  resize: false,
+                  skin: 'oxide-dark',
+                  content_style:
+                    'body {color: #fff; background-color: #080808;  }'
+                }"
+                class="w-full h-full bg-transparent rounded-md"
+              ></editor>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="w-full h-full">
+    <img
+      class="w-full h-full object-cover"
+      src="assets/cover-auth.avif"
+      alt="cover_image"
+    />
+  </div>
+</section>

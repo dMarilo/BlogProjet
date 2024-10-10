@@ -1,0 +1,32 @@
+<section class="w-full h-32 bg-black/90">
+    <div class="flex w-full h-full items-center px-16 gap-20">
+        <div class="flex-grow flex relative">
+          <input 
+          placeholder="Search" 
+          class="rounded-full text-white w-full h-16 bg-transparent py-2 pl-8 pr-32 text-xl outline-none border-2 border-gray-300/30 shadow-md hover:outline-none " 
+          type="text" 
+          name="query" 
+          id="query">
+          <button type="submit" class="absolute inline-flex items-center h-10 px-4 py-2 text-sm text-white transition duration-150 ease-in-out rounded-full outline-none right-3 top-3 bg-logo-green sm:px-6 sm:text-base sm:font-medium hover:bg-logo-blue 
+           focus:outline-none">
+            <svg class="-ml-0.5 sm:-ml-1 mr-2 w-4 h-4 sm:h-5 sm:w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Search
+          </button>
+          </div>
+        <div class="flex w-1/4 items-center gap-4">
+            <h4 class="text-white text-xl">Welcome back, {{adminName}}</h4>
+            @if(user?.profile_pic) {
+              <img class="w-14 h-14 rounded-full object-cover" [src]="user?.profile_pic" [alt]="user?.first_name">
+
+            } @else {
+              <svg class="w-14 h-14 me-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+              </svg>
+            }
+        
+            
+        </div>
+    </div>
+</section>

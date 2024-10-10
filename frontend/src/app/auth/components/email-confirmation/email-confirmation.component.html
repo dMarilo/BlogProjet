@@ -1,0 +1,14 @@
+<section class="relative h-screen w-full md:overflow-hidden">
+    <div class="absolute w-full flex flex-col items-center justify-center h-full text-gray-200 gap-6 bg-black/80">
+        <h1 class="text-6xl font-bold uppercase">Email Sent!</h1>
+        <p class="text-2xl">We have sent you an Email. Please check your inbox!</p>
+        <div class="flex flex-col gap-3 items-center mt-10">
+            <a href="https://mail.google.com/mail/u/0/#inbox" class="bg-logo-green hover:px-8 hover:bg-logo-blue  transition-all py-3 px-6 rounded-full text-xl uppercase">Go to mail</a>
+            <button (click)="navigateToHome()" class="hover:text-logo-blue transition-all">Home Page</button>
+        </div>
+
+    </div>
+    <div class="w-full h-full">
+        <img class="w-full h-full object-cover" src="assets/cover-auth.avif" alt="cover_image" />
+    </div>
+</section>

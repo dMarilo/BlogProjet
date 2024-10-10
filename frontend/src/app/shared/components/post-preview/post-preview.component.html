@@ -1,0 +1,299 @@
+<section class="w-full h-full">
+  <div class="relative w-full h-screen md:h-[600px] overflow-hidden">
+    <div class="absolute z-10 w-full h-full bg-black/70"></div>
+    <div
+      class="absolute bg-black/10 shadow-lg w-full flex items-center justify-between h-[8rem] px-6 lg:px-48 overflow-hidden z-30"
+    >
+      <a href="/">
+        <img
+          src="/assets/logo.png"
+          alt="Singularity Logo"
+          class="w-60 h-auto"
+        />
+      </a>
+
+      <a href="/"
+        class="px-8 flex items-center gap-5 py-3 rounded-full bg-logo-green border border-logo-green hover:border-white hover:bg-transparent transition-all text-white"
+
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-7"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+        <span class="text-lg"> Back </span>
+      </a>
+    </div>
+
+    <!-- HEADER -->
+    <div
+      class="absolute w-full flex items-center justify-center h-full max-h-[400px] z-20 mt-[8rem]"
+    >
+      <div
+        class="flex w-full max-w-[80%] h-full flex-col lg:flex-row items-center justify-between"
+      >
+        <!-- LEFT SIDE -->
+        <div
+          class="w-2/3 h-full flex items-start justify-center flex-col gap-12"
+        >
+          <div class="flex flex-col gap-6">
+            <p class="text-gray-500 text-lg">
+              <a href="/" class="hover:text-gray-200 transition-all">Home</a> /
+              <a href="" class="hover:text-gray-200 transition-all">Posts</a> /
+              <span class="font-semibold text-gray-200">{{ post?.title }}</span>
+            </p>
+            <h1 class="text-white text-5xl font-bold drop-shadow-md">
+              {{ post?.title }}
+            </h1>
+            <p class="text-xl text-white/80 drop-shadow-md max-w-[90%]">
+              {{ post?.shortDescription }}
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="w-1/3 h-full flex items-end justify-end">
+          <div class="flex flex-col gap-8 justify-center pt-5 lg:pt-20 h-full">
+            @if(isHot){
+
+            <span
+              class="bg-logo-red text-white text-md text-center font-semibold px-8 py-3 rounded-full"
+              >Hot Topic</span
+            >
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- image -->
+    <div class="w-full h-full">
+      <img
+        class="w-full object-cover"
+        [src]="'http://localhost:8000/storage/' + post?.image"
+        alt="cover_image"
+      />
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="w-full bg-gray-200">
+    <div
+      class="w-full flex flex-col-reverse md:flex-row gap-6 max-w-[80%] mx-auto"
+    >
+      <!-- LEFT SIDE CONTENT -->
+      <div class="w-3/4 bg-white my-10 rounded-lg shadow-lg">
+        <!--profile & likes -->
+        <div class="px-20 pt-10">
+          <div class="w-full flex items-center justify-between">
+            <div class="text-black-300/60 flex items-center gap-6 text-lg">
+              @if(post?.users?.profile_pic) {
+
+              <div>
+                <img
+                class="w-20 h-20 border-2 border-white rounded-full object-cover"
+                src="http://localhost:8000/storage/{{
+                  post?.users?.profile_pic
+                }}"
+                alt="{{ post?.users?.first_name }}'s image"
+                />
+              </div>
+              } @else {
+                <svg class="w-full h-full" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z" clip-rule="evenodd"/>
+                </svg>
+              }
+              <div class="flex flex-col w-full">
+                <div class="flex items-center">
+                  <span class="font-bold text-lg text-gray-500">{{ post?.users?.first_name }} {{ post?.users?.last_name }}</span>
+                </div>
+                <span class="text-gray-400 text-sm">{{
+                  post?.created_at | date : "mediumDate"
+                }}</span>
+              </div>
+
+            </div>
+            <div class="flex flex-col gap-3 w-1/4">
+              <div class="flex justify-end items-end flex-wrap gap-2 w-full">
+                @for(category of post?.categories; track category){
+                  <div class="px-3 border border-gray-400 bg-gray-200 rounded-full">
+                    <span class="text-xs text-end text-gray-400 ">{{category.name}}</span>
+                  </div>
+                }
+              </div>
+              <div class="flex items-end justify-end">
+                @if(isPopular){
+                <span
+                  class="border border-logo-green text-logo-green text-xs text-center font-semibold px-3 py-1 rounded-full"
+                  >Trending Blogger</span
+                >
+                }
+              </div>
+
+            </div>
+          </div>
+
+          <div class="border-b border-gray-300 mt-5"></div>
+
+          <!-- interaction -->
+          <div class="py-6">
+            <div class="flex flex-col gap-5">
+              <div class="flex flex-row-reverse items-center justify-between">
+                <p class="text-base text-gray-400 font-semibold">
+                  Views: {{ post?.views }}
+                </p>
+
+                <!-- buttons -->
+
+                <div class="flex items-center gap-6">
+                  <button
+                    (click)="isLogedInStatus ? addLike() : openModal('Liking posts')"
+                    class="inline-flex items-center text-logo-green focus:outline-none justify-end"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      [attr.fill]="isLiked ? 'currentColor' : 'none'"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      [attr.stroke]="isLiked ? 'none' : 'black'"
+                      stroke="black"
+                      class="size-7"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                      />
+                    </svg>
+                    <span [class]="isLiked ? 'text-logo-green' : 'text-black'">{{ postLikes }}</span>
+                  </button>
+                  <button class="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="black"
+                      class="size-7"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
+                      />
+                    </svg>
+                    <span>{{ post?.commentsCounter }}</span>
+                  </button>
+                  <button (click)="isLogedInStatus ? save() : openModal('Saving posts')" class="inline-flex items-center text-logo-green focus:outline-none justify-end">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      [attr.fill]="isSaved ? 'currentColor' : 'none'"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="black"
+                      [attr.stroke]="isSaved ? 'currentColor' : 'black'"
+                      class="size-7"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+                      />
+                    </svg>
+                    <span [class]="isSaved ? 'text-logo-green' : 'text-black'"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog content -->
+        <div class="flex flex-col gap-10 content w-full pb-10 px-20 mx-auto">
+
+          <div class="markdown" [innerHTML]="postContent"></div>
+          <hr class="mt-10" />
+          <div>
+            <app-comments
+            (commentAdded)="onCommentAdded()"
+            (commentDeleted)="onCommentDeleted()"
+            >
+            ></app-comments>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div
+        class="w-1/4 flex flex-col gap-10 h-screen bg-white my-10 rounded-lg shadow-lg p-6 sticky top-10"
+      >
+        <div class="flex flex-col gap-8 w-full">
+          <div class="flex items-center gap-5 border-b pb-3">
+            @if(post?.users?.profile_pic) {
+
+            <img
+              class="w-20 h-20 border-2 border-white rounded-full object-cover"
+              src="http://localhost:8000/storage/{{ post?.users?.profile_pic }}"
+              alt="{{ post?.users?.first_name }}'s image"
+            />
+            } @else {
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="bg-gray-200"
+              viewBox="0 0 24 24"
+              stroke-width="1"
+              stroke="bg-gray-300"
+              class="size-20 opacity-30 animate-pulse"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
+            }
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-lg text-gray-500"
+                >{{ post?.users?.first_name }}
+                {{ post?.users?.last_name }}
+              </span>
+
+
+              <button (click)="subscribe()" class="bg-logo-green font-semibold hover:bg-transparent border border-logo-green py-1.5 px-6 rounded-lg text-white hover:text-logo-green transition-all">
+                 {{buttontext}}
+              </button>
+
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="font-semibold text-gray-500">About:</span>
+            <p class="text-sm text-gray-500">{{ post?.users?.about }}</p>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-500">Joined:</p>
+            <span class="text-gray-500">{{
+              post?.users?.created_at | date : "MMMM yyyy"
+            }}</span>
+          </div>
+        </div>
+        <div>
+          <span class="text-xl text-gray-500 font-semibold"
+            >Suggested for you:</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-modal #myModal></app-modal>
+</section>

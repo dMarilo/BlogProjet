@@ -1,0 +1,18 @@
+
+button {
+    border: 1px solid transparent;
+  }
+  
+  button:hover {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  button.transition {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  

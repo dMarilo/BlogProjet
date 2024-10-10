@@ -1,0 +1,12 @@
+<section [ngStyle]="{'height': headerHeight}" class="h-[20rem] md:h-[28rem] relative w-full transition duration-300 ease-in overflow-hidden">
+    <div class="absolute inset-0 flex w-full h-full flex-col bg-[#080808]/80">
+        <app-navbar></app-navbar>
+        <app-category></app-category>
+        <div class="absolute bottom-0 w-full">
+            <app-search-bar (filterToggled)="onFilterToggled($event)"></app-search-bar>
+        </div>
+    </div>
+    <div class="w-full h-full">
+        <img class="w-full h-full object-cover" src="assets/cover-auth.avif" alt="cover_image" />
+    </div>
+</section>

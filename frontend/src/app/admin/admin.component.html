@@ -1,0 +1,16 @@
+<section class="relative w-full">
+
+    <div class="fixed top-0 left-0 z-0 w-full h-full">
+        <img class="w-full h-full object-cover" src="assets/cover-auth.avif" alt="cover_image" />
+    </div>
+
+    <div class="absolute flex w-full">
+        <div class="fixed top-0 left-0 w-[25rem] h-full z-10">
+            <app-side-menu></app-side-menu>
+        </div>
+        <div class="flex flex-col w-full ml-[25rem] z-20">
+            <app-admin-nav></app-admin-nav>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,74 @@
+<div class="relative w-full min-h-screen p-10">
+  <!-- skeleton loader -->
+  <div class="absolute top-0 left-0 w-full z-20 opacity-50">
+    @if(isBloggerLoading || isPageLoading) {
+    <div @fadeInOut>
+      <div role="status" class="flex flex-col gap-5">
+        @for (blogger of bloggers; track blogger) {
+        <div class="relative flex items-center justify-around h-24 w-full bg-gray-300 rounded-lg animate-pulse">
+          <div class="absolute gap-4 w-full p-4 flex items-center">
+            <svg class="max-w-16 max-h-16 text-gray-400 animate-pulse" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+            </svg>
+            <div class="flex flex-col gap-2">
+              <div class="h-3.5 rounded-full bg-gray-400 w-32 animate-pulse"></div>
+              <div class="flex flex-col gap-1">
+                <div class="h-2.5 rounded-full bg-gray-400 w-24 animate-pulse"></div>
+                <div class="h-2.5 rounded-full bg-gray-400 w-20 animate-pulse"></div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute flex items-center justify-end p-4 w-full">
+            <div class="h-10 rounded-xl bg-gray-400 w-28 animate-pulse"></div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- blogger displaying -->
+
+  <div class="absolute top-0 left-0 w-full">
+    @if(!isBloggerLoading || !isPageLoading) {
+    <div @fadeInOut>
+      <div role="status" class="flex flex-col gap-5">
+        @for(blogger of bloggers.slice(0, 3); track blogger) {
+        <div
+          class="cursor-pointer flex flex-col md:flex-row items-center w-full h-auto border border-logo-green hover:shadow-lg transition ease-in-out rounded-lg p-4 space-y-4"
+        >
+          <div
+            [routerLink]="['/profile-view', blogger.id]"
+            class="flex items-center w-full space-x-4"
+          >
+            <div>
+              @if(blogger.profile_pic) {
+              <img class="w-16 h-16 object-cover rounded-full" src="http://localhost:8000/storage/{{ blogger.profile_pic }}" alt="blogger profile" />
+              } @else {
+              <svg class="w-16 h-16 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+              </svg>
+              }
+            </div>
+            <div>
+              <h4 class="font-semibold text-lg">
+                {{ blogger.first_name }} {{ blogger.last_name }}
+              </h4>
+              <p class="text-xs text-gray-500 line-clamp-2">
+                {{ blogger.about }}
+              </p>
+            </div>
+          </div>
+          <!-- <div class="self-end">
+            <button class="bg-logo-green border border-logo-green py-2 px-6 rounded-lg text-white hover:bg-green-700 transition duration-200">
+              Subscribe
+            </button>
+          </div> -->
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+</div>

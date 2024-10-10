@@ -1,0 +1,52 @@
+
+    @if(!isPostLoading) {
+        <div class="flex gap-6 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            @for (post of posts.slice(2, 5); track post) {
+              <article>
+                <div
+                  [routerLink]="['/post-preview', post.slug]"
+                  class="relative min-w-[15rem] h-40 bg-cover cursor-pointer bg-center bg-no-repeat group rounded-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out"
+                  [ngStyle]="{
+                    'background-image':
+                      'url(http://localhost:8000/storage/' + post.image + ')'
+                  }"
+                >
+                  <div
+                    class="absolute inset-0 bg-black bg-opacity-70 group-hover:opacity-50 transition duration-300 ease-in-out"
+                  ></div>
+                  <div
+                    class="relative w-full h-full px-4 py-6 flex flex-col justify-center items-center text-center"
+                  >
+                    <h3 class="text-white text-xl font-bold mb-2">
+                      <h2 class="line-clamp-2">
+                        {{ post.title }}
+                      </h2>
+                    </h3>
+                  </div>
+                  <div
+                    class="absolute bottom-2 left-2 flex items-center"
+                  >
+                    @if(post.users) {
+                    <a
+                      [routerLink]="['/profile-view', post.users.id]"
+                      class="flex items-center p-3"
+                    >    
+                      <div class="ml-2 text-white text-sm">
+                        <p class="leading-none">
+                          {{ post.users.first_name }} {{ post.users.last_name }}
+                        </p>
+                        <p class="text-gray-400 text-xs mt-1">
+                          {{ post.created_at | date: 'mediumDate' }}
+                        </p>
+                      </div>
+                    </a>
+                    }
+                  </div>
+                </div>
+              </article>
+              }
+              </div>
+          </div>
+
+    }

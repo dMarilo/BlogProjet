@@ -1,0 +1,150 @@
+@if(user?.user_type === "Reader") {
+  <div *ngIf="user?.user_type === 'Reader' || user?.user_type === 'pending'" class="flex flex-col items-center text-center p-6 bg-gray-100 rounded-lg shadow-lg">
+    <h1 class="text-5xl font-extrabold text-teal-600 mb-4">Thinking About Starting a Blog?</h1>
+    <p class="text-lg text-gray-800 mb-6">
+      Blogging is an amazing way to share your passion and connect with like-minded individuals.
+      Ready to dive in? Click below to get more info and start your blogging journey!
+    </p>
+    <button
+      (click)="requestUpgrade()"
+      [disabled]="loading || requestSent || user?.user_type === 'pending'"
+      class="px-6 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md transform transition-transform hover:scale-105 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300"
+      [ngClass]="{'opacity-50 cursor-not-allowed': loading || requestSent || user?.user_type === 'pending'}"
+    >
+      <ng-container *ngIf="loading; else buttonContent">
+        <div class="flex items-center">
+          <svg class="animate-spin h-5 w-5 mr-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0116 0 8 8 0 01-16 0z"></path>
+          </svg>
+          Loading...
+        </div>
+      </ng-container>
+      <ng-template #buttonContent>
+        <ng-container *ngIf="!requestSent; else requestSentText">
+          Become a blogger
+        </ng-container>
+        <ng-template #requestSentText>
+          Request Sent! Please wait for confirmation.
+        </ng-template>
+      </ng-template>
+    </button>
+  </div>
+
+} @else if (user?.user_type === "pending") {
+  <div class="flex flex-col items-center text-center p-6 bg-gray-100 rounded-lg shadow-lg">
+    <h1 class="text-5xl font-extrabold text-teal-600 mb-4">Thinking About Starting a Blog?</h1>
+    <p class="text-lg text-gray-800 mb-6">
+      Blogging is an amazing way to share your passion and connect with like-minded individuals.
+      Ready to dive in? Click below to get more info and start your blogging journey!
+    </p>
+    <button
+      [disabled]="user?.user_type === 'pending'"
+      class="px-6 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md transform transition-transform hover:scale-105 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300"
+      [ngClass]="{'opacity-50 cursor-not-allowed': user?.user_type === 'pending'}"
+    >
+      <ng-container *ngIf="loading; else buttonContent">
+        <div class="flex items-center">
+          <svg class="animate-spin h-5 w-5 mr-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 0116 0 8 8 0 01-16 0z"></path>
+          </svg>
+          Loading...
+        </div>
+      </ng-container>
+      <ng-template #buttonContent>
+        <ng-container>
+          Request Sent! Please wait for confirmation.
+        </ng-container>
+      </ng-template>
+    </button>
+  </div>
+} @else if (user?.user_type === "Blogger" && noPosts === true) {
+  <div class="flex flex-col items-center text-center p-6 bg-gray-100 rounded-lg shadow-lg">
+    <h1 class="text-5xl font-extrabold text-teal-600 mb-4">It looks like you have no posts yet?</h1>
+    <p class="text-lg text-gray-800 mb-6">
+      Create your first post now!
+    </p>
+    <button
+      class="px-6 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md transform transition-transform hover:scale-105 hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300"
+    (click)="navigateToNewPost()">
+      <ng-container *ngIf="loading; else buttonContent">
+
+      </ng-container>
+      <ng-template #buttonContent>
+        <ng-container>
+          Create new post now!
+        </ng-container>
+      </ng-template>
+    </button>
+  </div>
+} @else {
+  <section class="relative mx-auto mb-12 w-3/4">
+    <!-- Container for posts -->
+    <div class="flex flex-wrap -mx-4">
+      <!-- Iterate over posts -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full px-10">
+        @for (post of paginatedPosts; track post) {
+          <article>
+            <div
+              [routerLink]="['/post-preview', post.slug]"
+              class="relative min-w-[10rem] h-80 bg-cover cursor-pointer bg-center bg-no-repeat group rounded-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out"
+              [ngStyle]="{
+                'background-image':
+                  'url(http://localhost:8000/storage/' + post.image + ')'
+              }"
+            >
+              <div
+                class="absolute inset-0 bg-black bg-opacity-70 group-hover:opacity-50 transition duration-300 ease-in-out"
+              ></div>
+              <div
+                class="relative w-full h-full px-4 py-6 flex flex-col justify-center items-center gap-5 text-center"
+              >
+                <div>
+                  <h3 class="text-white text-2xl font-bold mb-2">
+                    {{ post.title }}
+                  </h3>
+                  <p class="text-white text-lg line-clamp-3">
+                    {{ post.shortDescription }}
+                  </p>
+                </div>
+                <p class="text-gray-400 text-xs mt-1">{{ post.created_at | date:'mediumDate' }}</p>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+    <!-- Pagination Controls -->
+    <div class="flex justify-center mt-4 space-x-1">
+      <!-- Previous Button -->
+      <button
+        class="px-2 py-1 bg-green-400 text-white rounded-lg hover:bg-green-500 transition duration-300 ease-in-out"
+        [disabled]="currentPage === 1"
+        (click)="previousPage()">
+        Previous
+      </button>
+
+      <!-- Page Numbers -->
+      <ng-container *ngFor="let page of getPageNumbers(); let i = index">
+        <button
+          class="px-2 py-1 rounded-lg transition duration-300 ease-in-out"
+          [class.bg-green-400]="currentPage === page"
+          [class.text-white]="currentPage === page"
+          [class.bg-gray-200]="currentPage !== page"
+          [class.text-green-500]="currentPage !== page"
+          (click)="goToPage(page)">
+          {{ page }}
+        </button>
+      </ng-container>
+
+      <!-- Next Button -->
+      <button
+        class="px-2 py-1 bg-green-400 text-white rounded-lg hover:bg-green-500 transition duration-300 ease-in-out"
+        [disabled]="(currentPage * itemsPerPage) >= posts.length"
+        (click)="nextPage()">
+        Next
+      </button>
+    </div>
+  </section>
+}

@@ -1,0 +1,28 @@
+<section class="bg-black/90 flex flex-col w-full h-full">
+        <div class="w-full h-32 flex items-center justify-center">
+           <a href="/">
+            <img src="/assets/logo.png" alt="logo" class="w-60">
+           </a> 
+        </div>
+        <hr class="mx-10 opacity-15">
+        <div class="flex flex-col w-full text-white p-10 gap-4 text-3xl mt-10">
+                @for(item of navItems; track item) {
+                        <div  class="group ">
+                                <a routerLinkActive="active"  [routerLink]="item.href" [routerLinkActiveOptions]="{exact: true}" class="flex items-center gap-8 rounded-lg  py-4 px-4 transition duration-200 ease-in hover:bg-logo-yellow/70 hover:text-black">
+                                        @if(item.label === 'Users' && pendingUsersCount) {
+                                                <div class="absolute right-14 w-4 h-4 bg-red-600 rounded-full"></div>
+                                        }
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 group-hover:animate-bounce">
+                                                @for(icon of item.icons; track navItems ){
+                                                        <path [attr.d]="icon" stroke-linecap="round" stroke-linejoin="round"/>
+                                                }
+                                        </svg>
+                                        <span>{{item.label}}</span>
+                                </a>
+                        </div>
+                }
+                
+                
+        </div>
+</section>
+

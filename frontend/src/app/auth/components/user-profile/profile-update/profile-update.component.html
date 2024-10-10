@@ -1,0 +1,102 @@
+<div class="w-full bg-white/90">
+    <div class="flex flex-col gap-10 w-full p-20">
+
+        <div>
+            <h1 class="text-4xl font-bold text-logo-yellow/80">Edit Profile</h1>
+            <hr class="mt-5 border-logo-yellow/70">
+        </div>
+
+        <button (click)="navigateBack()" class="px-8 flex items-center gap-5 py-3 rounded-full bg-logo-green border border-logo-green hover:border-white hover:bg-transparent transition-all text-white max-w-40">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-7"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+           <span class="uppercase text-lg">back</span>
+        </button>
+
+        <div class="flex flex-col-reverse lg:flex-row items-center shadow-lg bg-white overflow-hidden rounded-3xl w-full h-screen">
+            <form class="flex flex-col p-10 gap-4 w-full lg:w-1/2 h-full overflow-y-auto" [formGroup]="profileEditForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                <div class="form-group flex flex-col">
+                    <label class="px-3 py-1 text-logo-green" for="about">About me:</label>
+                    <textarea
+                    class="py-4 px-3 text-base rounded-xl border text-gray-500 border-logo-green outline-none"
+                    rows="5"
+                    id="about"
+                    name="about"
+                    formControlName="about"
+                    maxlength="255"
+                    placeholder="About me..."
+                    required
+                    ></textarea>
+                    @if(profileEditForm.get('about')?.value.length > 0){
+                        <small> {{profileEditForm.get('about')?.value.length }}/255</small>
+                    }
+                </div>
+
+                <div class="form-group flex flex-col">
+                    <label class="px-3 py-1 text-logo-green" for="gender">Gender:</label>
+                    <select
+                    class="py-4 px-3 outline-none cursor-pointer border rounded-xl text-gray-500 border-logo-green"
+                    id="gender"
+                    name="gender"
+                    formControlName="gender"
+                    required>
+                        <option value="" disabled>Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+
+                <div class="form-group flex flex-col">
+                  <label class="px-3 py-1 text-logo-green" for="country">Select Country:</label>
+                  <select
+                    id="country"
+                    class="py-4 px-3 outline-none cursor-pointer border rounded-xl text-gray-500 border-logo-green"
+                    formControlName="country"
+                    required>
+                    <option value="" disabled>Select country</option>
+                    <option *ngFor="let country of countries" [value]="country.value">{{ country.value }}</option>
+                  </select>
+              </div>
+
+                <div class="form-group flex flex-col">
+                    <mat-label class="px-3 py-1 text-logo-green" for="birth">Birthdate:</mat-label>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="picker" class="outline-none border border-logo-green rounded-xl py-2 px-3" formControlName="birth" placeholder="Birthdate" />
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                </div>
+                <div>
+                    <label class="px-3 py-1 text-logo-green" for="dropzone">Profile Photo:</label>
+                    <app-image-dropzone></app-image-dropzone>
+                </div>
+
+                <button class="py-3 px-4 bg-logo-green rounded-xl text-white" type="submit" [disabled]="profileEditForm.invalid">Submit</button>
+            </form>
+            <div class="w-full lg:w-1/2 relative h-2/3 lg:h-full overflow-hidden">
+                <div class="absolute w-full p-8 flex items-end justify-end">
+                    <img class="w-[15rem] lg:w-[20rem] mt-3 lg:mt-10 drop-shadow-md" src="assets/logo.png" alt="">
+                </div>
+                <div class="absolute w-full h-full p-8 flex items-end justify-start">
+                    <p class="w-2/3 text-white mb-3 lg:mb-10 font-semibold italic">"Enhance your experience by keeping your profile up-to-date. Adjust your information, manage your preferences, and make sure your details reflect your current interests.
+
+                      Your profile helps us deliver a more personalized experience tailored just for you."</p>
+                </div>
+                <img class="object-cover h-full w-full" src="/assets/blog.jpg" alt="">
+            </div>
+        </div>
+
+    </div>
+</div>

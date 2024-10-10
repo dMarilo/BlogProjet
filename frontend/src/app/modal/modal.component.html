@@ -1,0 +1,16 @@
+<div class="modal-backdrop" *ngIf="isVisible" (click)="close()"></div>
+<div class="modal-container" *ngIf="isVisible" [ngClass]="{'show': isVisible}">
+  <div class="email-container">
+    <div class="header">
+      <img src="assets/logo.png" alt="Your Company Logo" />
+    </div>
+    <div class="content">
+      <h1>Oops! {{ message }} isn't available for unregistered users!</h1>
+      <p>Register and become a member of the Singu community today.</p>
+      <a href="#" class="button" (click)="register($event)">Register</a>
+    </div>
+    <div class="footer">
+      <p>We're waiting for you</p>
+    </div>
+  </div>
+</div>

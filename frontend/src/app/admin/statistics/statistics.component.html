@@ -1,0 +1,43 @@
+<div class="w-full min-h-screen bg-white/90">
+  <div class="flex flex-col p-10 gap-5">
+    <h1 class="text-4xl text-gray-500 font-bold">Dashboard</h1>
+    <hr class="rounded-full">
+  </div>
+
+  <div class="flex items-center w-full px-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+    @for(item of statisticsItem; track item) {
+      @if(item.href) {
+        <div [routerLink]="[item.href]" class="w-full">
+          <div class="relative border rounded-3xl {{item.color}} flex items-center justify-center h-44 overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-out">
+  
+            <div class="absolute z-10 p-4 text-center">
+              <h2 class="text-3xl text-white">{{item.card}}</h2>
+            </div> 
+  
+            <img class="inset-0 w-full h-full object-cover opacity-20 transition-all" src={{item.image}} alt="" />
+  
+          
+          </div>
+         </div>
+      } @else {
+        <div class="w-full">
+          <div class="relative border rounded-3xl {{item.color}} flex items-center justify-center h-44 overflow-hidden cursor-pointer hover:scale-105 transition-all duration-300 ease-out">
+  
+            <div class="absolute z-10 p-4 text-center">
+              <h2 class="text-3xl text-white">{{item.card}}</h2>
+              @if(item.card === "New Users This Month") {
+                <p class="text-white text-lg">{{newUsersCount}}</p>
+              } @else if(item.card === "Views This Month") {
+                <p class="text-white text-lg">{{totalViews}}</p>
+              }
+            </div> 
+  
+            <img class="inset-0 w-full h-full object-cover opacity-20 transition-all" src={{item.image}} alt="" />
+  
+          </div>
+         </div>
+      }
+    }
+  </div>  
+</div>

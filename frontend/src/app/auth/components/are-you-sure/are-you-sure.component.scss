@@ -1,0 +1,80 @@
+$primary-color: #3ac69f;
+$secondary-color: #1e272e;
+$text-color: #ffffff;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:host {
+  display: block;
+  height: 100vh;
+  width: 100%;
+  background: $secondary-color url('/assets/cover-auth.avif') no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  color: $text-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  color: $text-color;
+  z-index: 2;
+}
+
+.error-message {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+  max-width: 600px;
+  width: 90%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+
+  .logo {
+    margin-bottom: 20px;
+    img {
+      max-width: 300px;
+      height: auto;
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 3em;
+    color: $primary-color;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 10px 0;
+    font-size: 1.2em;
+  }
+
+  button {
+    background-color: $primary-color;
+    border: none;
+    color: $text-color;
+    padding: 12px 24px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: scale(1.05) rotate(5deg);
+    }
+  }
+}

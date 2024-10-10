@@ -1,0 +1,50 @@
+<div class="w-full h-screen bg-white p-8">
+  <h1 class="text-5xl font-bold mb-12 text-center">Growth Statistics</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+    <!-- Growth This Week Card -->
+    <div class="card bg-teal-600 flex items-center text-white">
+      <div class="icon-container">
+        <i class="fas fa-calendar-week fa-4x"></i>
+      </div>
+      <div class="card-content">
+        <h2 class="text-2xl font-semibold">Growth This Week</h2>
+        <p class="text-3xl font-bold">{{ growthData.growthWeek }}%</p>
+      </div>
+    </div>
+
+    <!-- Growth This Month Card -->
+    <div class="card bg-teal-600 flex items-center text-white">
+      <div class="icon-container">
+        <i class="fas fa-calendar-month fa-4x"></i>
+      </div>
+      <div class="card-content">
+        <h2 class="text-2xl font-semibold">Growth This Month</h2>
+        <p class="text-3xl font-bold">{{ growthData.growthMonth }}%</p>
+      </div>
+    </div>
+
+    <!-- Growth This Quarter Card -->
+    <div class="card bg-teal-600 flex items-center text-white">
+      <div class="icon-container">
+        <i class="fas fa-calendar-quarter fa-4x"></i>
+      </div>
+      <div class="card-content">
+        <h2 class="text-2xl font-semibold">Growth This Quarter</h2>
+        <p class="text-3xl font-bold">{{ growthData.growthQuarter }}%</p>
+      </div>
+    </div>
+
+    <!-- Growth This Year Card -->
+    <div class="card bg-teal-600 flex items-center text-white">
+      <div class="icon-container">
+        <i class="fas fa-calendar-year fa-4x"></i>
+      </div>
+      <div class="card-content">
+        <h2 class="text-2xl font-semibold">Growth This Year</h2>
+        <p class="text-3xl font-bold">{{ growthData.growthYear }}%</p>
+      </div>
+    </div>
+  </div>
+</div>
+

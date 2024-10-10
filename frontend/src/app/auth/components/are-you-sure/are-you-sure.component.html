@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="error-message">
+    <div class="logo">
+      <img src="assets/logo.png" alt="Logo">
+    </div>
+    <h1>Really? You're leaving?</h1>
+    <p>It seems as though you don't want to be a part of the community anymore.</p>
+    <p>Before you leave, would you mind telling us why you are going?</p>
+    <select id="leave-reason" aria-label="Reason for leaving">
+      <option value="" disabled selected>Select a reason</option>
+      <option value="tired_of_blogging">Tired of blogging</option>
+      <option value="need_a_break">Just need a break</option>
+      <option value="other_reasons">Other reasons</option>
+    </select>
+    <button (click)="onDeleteAccount()">Delete Account</button>
+  </div>
+  <div class="animation">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+</div>

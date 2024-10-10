@@ -1,0 +1,39 @@
+<section class="flex flex-col md:flex-row w-full h-full py-20 px-10 gap-6 bg-gray-200">
+    <div class="w-full md:w-2/3 rounded-lg shadow-md p-5 md:p-10 bg-white">
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center justify-between w-full">
+          <h2 class="text-2xl font-semibold text-gray-500">Latest Posts</h2>
+          <a routerLink="/blogs" class="text-gray-400 hover:text-gray-600 transition-all font-semibold">View all posts</a>
+        </div>
+        <hr>
+      </div>
+  
+      <!-- Displaying post -->
+      <div> 
+        <app-post-card></app-post-card>
+      </div>
+  
+      <!-- Most popular posts -->
+      <div> 
+        <h2 class="text-2xl font-semibold text-gray-500">Most Popular Posts</h2>
+        <hr>
+      </div>
+  
+      <div> 
+        <app-popular-posts></app-popular-posts>
+      </div>
+    </div>
+  
+    <div class="w-full md:w-1/3 rounded-lg shadow-md p-10 bg-white">
+      <div class="flex flex-col gap-3">
+        <h2 class="text-2xl font-semibold text-gray-500">Trending Bloggers</h2>
+        <hr>
+      </div>
+  
+      <!-- Displaying bloggers -->
+      <div class="mt-6"> 
+        <app-blogger-displaying></app-blogger-displaying>
+      </div>
+    </div>
+  </section>
+  

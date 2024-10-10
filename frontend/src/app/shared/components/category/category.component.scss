@@ -1,0 +1,40 @@
+/* Hide scrollbar for carousel */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Smooth hover effect */
+button {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Smoother carousel scroll behavior */
+.carousel {
+  scroll-behavior: smooth;
+}
+
+/* Smooth arrow hover effect */
+button:hover svg {
+  transform: translateX(2px);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Animation for skeleton loader */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

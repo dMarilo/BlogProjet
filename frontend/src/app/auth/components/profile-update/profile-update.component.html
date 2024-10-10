@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+  <form (ngSubmit)="onSubmit()" #profileForm="ngForm" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="about">About:</label>
+        <input type="text" id="about" name="about" [(ngModel)]="model.about" placeholder="Enter about" required>
+    </div>
+
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" [(ngModel)]="model.gender" required>
+            <option value="" disabled>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="user_type">User Type:</label>
+        <select id="user_type" name="user_type" [(ngModel)]="model.user_type" required>
+            <option value="" disabled>Select user type</option>
+            <option value="Blogger">Blogger</option>
+            <option value="Reader">Reader</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="birthdate">Birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate" [(ngModel)]="model.birthdate" required>
+    </div>
+
+    <div class="form-group">
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture" (change)="onFileChange($event)">
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+
+</body>
+</html>

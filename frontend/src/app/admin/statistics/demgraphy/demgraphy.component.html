@@ -1,0 +1,17 @@
+<div class="w-full h-full min-h-screen bg-white p-8">
+  <h1 class="text-4xl font-bold mb-8">User Demographics</h1>
+  <div *ngFor="let country of countries">
+    <div class="mb-4">
+      <span class="block text-lg font-medium">{{ country.key }}</span>
+      <div class="relative pt-1">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-semibold inline-block py-1 px-2 rounded text-teal-600 bg-teal-200 uppercase last:mr-0 mr-1">{{ country.value }}</span>
+          <span class="text-xs font-semibold inline-block py-1 px-2 rounded text-gray-700 bg-gray-200">{{ (country.value / getTotalUsers() * 100).toFixed(2) }}%</span>
+        </div>
+        <div class="flex-grow h-2 bg-gray-200 rounded">
+          <div class="h-full bg-teal-600 rounded" [ngStyle]="{'width': (country.value / getTotalUsers() * 100) + '%'}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

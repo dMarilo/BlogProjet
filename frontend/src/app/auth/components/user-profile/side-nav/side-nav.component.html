@@ -1,0 +1,63 @@
+<div class="w-full h-full overflow-hidden">
+    <div [ngClass]="{'w-[7rem]': !isExpanded, 'w-[22rem]': isExpanded}" class="h-full transition-all duration-300 ease-in">
+
+        <!-- logo -->
+        <div class="flex flex-col w-full h-full items-center py-5">
+            <div class="flex flex-col w-ful">
+                <a href="/">
+                    <img [ngClass]="{'w-14 h-14 mb-5': !isExpanded, 'w-60 py-5 mb-0': isExpanded}" [src]="!isExpanded ? '/assets/logo-half.png' : '/assets/logo.png'" alt="logo">
+                </a>
+            </div>
+            <hr class="opacity-15 w-5/6">
+
+            <!-- items -->
+
+            <!-- not expanded -->
+            @if(!isExpanded) {
+                <div class="flex flex-col items-center justify-center text-white gap-4 w-full h-full mb-10">
+                    @for(item of sideNav; track item) {
+                        <div class="group">
+                            <a [href]="item.route" [ngClass]="{'bg-logo-yellow/70 text-black': isActive(item.route)}" class="flex items-center rounded-lg py-4 px-4 transition duration-200 ease-in hover:bg-logo-yellow/70 hover:text-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-8">
+                                    <path [attr.d]="item.icon" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+
+            <!-- expanded -->
+            @if(isExpanded) {
+                <div class="flex flex-col w-full h-full justify-center text-white gap-4 p-5 text-2xl mb-10">
+                    @for(item of sideNav; track item) {
+                        <div class="group">
+                            <a [href]="item.route" [ngClass]="{'bg-logo-yellow/70 text-black': isActive(item.route)}" class="flex items-center gap-8 rounded-lg  py-4 px-4 transition duration-200 ease-in hover:bg-logo-yellow/70 hover:text-black">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-8 group-hover:animate-bounce">
+                                    <path [attr.d]="item.icon" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span>{{item.label}}</span>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+
+
+        <!-- slider -->
+         <div class="absolute bottom-10 w-full flex justify-center">
+            <div [ngClass]="{'justify-center': !isExpanded, 'justify-end': isExpanded}" class="flex w-full items-center px-10 transition-all duration-300">
+                <button (click)="toggleExpand()" class="text-white">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="size-7">
+                        <path stroke-linecap="round" stroke-linejoin="round" [attr.d]="!isExpanded ? 'M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3' : 'M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18' " />
+                      </svg>
+                </button>
+            </div>
+         </div>
+
+
+        </div>
+    </div>
+</div>

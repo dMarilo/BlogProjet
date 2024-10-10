@@ -1,0 +1,65 @@
+<div class="relative w-full">
+  <label class="block text-white/80 w-full font-semibold text-xl mb-2"
+    >Select Categories:</label
+  >
+  <div
+    (click)="toggleDropdown()"
+    class="flex items-center justify-between border border-gray-300 rounded-lg bg-transparent p-3 text-white/70 cursor-pointer"
+  >
+    <span>Select Category</span>
+    <img class="w-3 transform transition-transform"
+    [class.rotate-180]="dropdownOpen"
+    src="assets/arrow-down-sign-to-navigate.png" 
+    alt="" />
+  </div>
+
+  @if (dropdownOpen) {
+  <div class="bg-black/80 dropdown-menu rounded-b-lg overflow-hidden h-[120px] overflow-y-auto py-3">
+    @for(category of categories; track categories ) {
+    <div
+      class="text-white px-8 py-2 hover:bg-zinc-800/90 transition-all cursor-pointer"
+      (click)="toggleCategory(category)"
+    >
+      {{ category.name }}
+    </div>
+    }
+  </div>
+  }
+
+  <label class="block text-white/80 w-full font-semibold text-xl my-3"
+    >Selected Categories:</label
+  >
+  @if(selectedCategories.length) {
+  <div class="flex">
+    <ul class="flex items-center justify-center gap-5">
+      @for(category of selectedCategories; track selectedCategories) {
+        
+      <li class="text-white hover:text-logo-blue flex items-center rounded-full gap-5 bg-logo-blue hover:bg-transparent border border-logo-blue px-3 py-2 transition-all">{{ category.name }}
+        <img src="assets/clear.png" class="w-2 h-2 cursor-pointer" (click)="removeCategory(category)"/>
+      </li>
+      }
+    </ul>
+  </div>
+
+  }
+</div>
+
+<!-- <div [formGroup]="form" class="mb-6">
+  <label class="block text-white font-medium mb-2">Categories</label>
+  <select multiple formControlName="selectedCategories" (change)="onCategoryChange()"
+          class="w-full p-3 border border-gray-300 rounded-md bg-transparent text-white">
+    @for(category of categories; track category){
+    <option [value]="category.id">{{ category.name }}</option>
+    }
+  </select>
+
+  <div class="mt-4">
+    <label class="block font-medium mb-2 text-white">Selected Categories</label>
+
+    <span class="text-white">
+       
+        {{ selectedCategoryNames }}
+      
+    </span>
+    
+</div> -->

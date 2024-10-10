@@ -1,0 +1,13 @@
+<section class="relative w-full">
+    <div class="fixed top-0 left-0 z-0 w-full h-full">
+        <img class="w-full h-full object-cover" src="assets/cover-auth.avif" alt="cover_image" />
+    </div>
+    <div class="absolute flex w-full">
+        <div class="fixed top-0 left-0 bg-black/80 h-full z-10">
+            <app-side-nav (toggle)="toggleExpand($event)"></app-side-nav>
+        </div>
+        <div [ngClass]="{'ml-[7rem]': !isExpanded, 'ml-[22rem]': isExpanded}" class="flex flex-col w-full z-20 ml-[7rem] transition-all duration-300 ease-in">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</section>
